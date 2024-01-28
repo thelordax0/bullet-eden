@@ -1,12 +1,27 @@
 package org.thelordax0.bulleteden;
 
-public class Game implements Runnable{
+import javax.swing.*;
+import java.awt.*;
+
+public class Game extends Canvas implements Runnable{
     public static int width=300;
     public static  int height=width/16*9;
     public static int scale=3;
 
     private Thread thread;
     private boolean running=false;
+
+
+    public JFrame frame;
+
+    public Game(){
+
+        Dimension size=new Dimension(width*3,height*3);
+        this.setPreferredSize(size);
+
+        frame=new JFrame();
+
+    }
 
 
     public synchronized void start(){
@@ -30,5 +45,20 @@ public class Game implements Runnable{
         while(running){
 
         }
+    }
+
+
+    public static  void main(String[] args){
+
+        Game game=new Game();
+        game.frame.add(game);
+        game.frame.setTitle("Bullet Eden");
+        game.frame.setLocationRelativeTo(null);
+        game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.frame.setResizable(false);
+        game.frame.pack();
+        game.frame.setVisible(true);
+        game.start();
+
     }
 }
