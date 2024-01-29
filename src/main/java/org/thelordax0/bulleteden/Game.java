@@ -67,5 +67,12 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3);
             return;
         }
+
+        Graphics g=bs.getDrawGraphics();
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,this.getWidth(),this.getHeight());
+        g.dispose();
+        bs.show();
+
     }
 }
