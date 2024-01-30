@@ -1,8 +1,13 @@
 package org.thelordax0.bulleteden;
 
+import org.thelordax0.bulleteden.graphics.Screen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable {
     public static int width = 300;
@@ -11,17 +16,26 @@ public class Game extends Canvas implements Runnable {
     public JFrame frame;
     private Thread thread;
     private boolean running = false;
-
+    private BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+    private int[] pixels=  ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+    private Screen screen;
     public Game() {
 
-        Dimension size = new Dimension(width * 3, height * 3);
+        Dimension size = new Dimension(width * scale, height * scale);
         this.setPreferredSize(size);
+
+        screen=new Screen(width,height);
 
         frame = new JFrame();
 
     }
 
     public static void main(String[] args) {
+
+
+
+
+
 
         Game game = new Game();
         game.frame.add(game);
@@ -32,6 +46,7 @@ public class Game extends Canvas implements Runnable {
         game.frame.pack();
         game.frame.setVisible(true);
         game.start();
+
 
     }
 
